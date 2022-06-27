@@ -46,10 +46,13 @@ def drawing(dataset, lower_w_bound = 50):
         'with_labels' : True,
         'font_weight' : 'regular',
     }
+    # font setting
     
-    font_name = fm.FontProperties(fname = "C:\\Windows\\Fonts\\HANBatangExtB.ttf").get_name()
+    fm._rebuild()
+    font_fname = "C:/Windows/Fonts/Hancom Gothic Regular.ttf"
+    fontprop = fm.FontProperties(fname = font_fname, size = 18).get_name()
     # rc('font', family = 'NanumBarunGothicOTF')
-    nx.draw(G, node_size = sizes, pos = nx.spring_layout(G, k=3.5), font_family = font_name, font_size = 10, **options)
+    nx.draw(G, node_size = sizes, pos = nx.spring_layout(G, k=3.5, iterations = 100), font_family = fontprop, **options)
     ax = plt.gca()
     ax.collections[0].set_edgecolor("#555555")
     plt.show()
