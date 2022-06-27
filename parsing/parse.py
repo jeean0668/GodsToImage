@@ -43,7 +43,7 @@ def save_to_excel(frame, path, name):
     columns = ['src', 'trg', 'weight']
     df = pd.DataFrame([(k[0], k[1], v) for k, v in frame.items()], columns = columns)
     try:
-        df.to_csv(os.path.join(path, name), index = False)
+        df.to_excel(os.path.join(path, name), index = False)
     except:
         print(f"Error arise while saving to excel {name}...")
     
@@ -77,7 +77,7 @@ if __name__ == "__main__":
         
         print(f"saving the {file_name}...")
         if debuggued:
-            save_to_excel(frame, path, file_name + '_debug')
+            save_to_excel(frame, path + '/debug', '_debug_'+file_name)
         else:
             save_to_excel(frame, path, file_name)
         print(f"{file_name} saving finished...")
