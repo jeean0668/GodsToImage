@@ -6,11 +6,12 @@ import operator
 import numpy as np
 import matplotlib.font_manager as fm
 import matplotlib.pyplot as plt 
+from matplotlib import rc
 
-def drawing(df):
+def drawing(dataset, lower_w_bound = 50):
     
     centrality = nx.Graph()
-    lower_w_bound = 2
+    lower_w_bound = lower_w_bound
     
     for ind in range(len(np.where(dataset['weight'] >= lower_w_bound)[0])):
         centrality.add_edge(dataset['src'][ind], dataset['trg'][ind], weight = int(dataset['weight'][ind]))
@@ -46,7 +47,9 @@ def drawing(df):
         'font_weight' : 'regular',
     }
     
-    nx.draw(G, node_size = sizes, pos = nx.spring_layout(G, k=3.5), **options)
+    font_name = fm.FontProperties(fname = "C:\\Windows\\Fonts\\HANBatangExtB.ttf").get_name()
+    # rc('font', family = 'NanumBarunGothicOTF')
+    nx.draw(G, node_size = sizes, pos = nx.spring_layout(G, k=3.5), font_family = font_name, font_size = 10, **options)
     ax = plt.gca()
     ax.collections[0].set_edgecolor("#555555")
     plt.show()
