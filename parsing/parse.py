@@ -1,4 +1,5 @@
 
+from distutils.log import debug
 import pandas as pd
 import os
 import openpyxl
@@ -36,19 +37,34 @@ def split_src_target(news, frame):
                 trg = new_[j]
                 frame[(src, trg)] += 1
                 
-                                
+def save_to_excel(frame, path, name):
+
+    columns = ['src', 'trg', 'weight']
+    df = pd.DataFrame([(k[0], k[1], v) for k, v in frame.items()], columns = columns)
+    df.to_csv(os.path.join(path, name), index = False)
+    
 if __name__ == "__main__":
     
     root = 'parsing/news/Islam'
     religion = 'Islam'
+    debuggued = True
+    frame = defaultdict(int)
+    path = "parsing/news/Islam_parsed"
     
     file_names = os.listdir(root)
     
     data = excel_open(file_names[0], root, debug = False)
     # using only keyword column
     parsed = parsing_data(data, debug = False)
-    frame = defaultdict(int)
-    split_src_target(parsed, frame)
-    print(frame[:5])
     
+    if debuggued:
+        split_src_target(parsed[:10], frame)
+    else:
+        split_src_target(parsed, frame)
+        
+    if debuggued:
+        save_to_excel(frame, path, file_names[0] + '_debug')
+    else:
+        save_to_excel(frame, path, file_names[0])
+   
     
