@@ -1,0 +1,8 @@
+
+# using conda
+conda install -c conda-forge selenium
+conda install -c conda-forge xmltodict
+conda install -c mutirri selenium-chromedriver
+
+https://yadongshow.org/yadongzip_ko2/%ED%95%9C%EA%B5%AD%EC%95%BC%EB%8F%99-%EA%B5%AD%EC%82%B0%EC%B5%9C%EC%8B%A0%EC%9E%91-%EA%B9%80x%EC%95%84-%ED%92%80%EB%B2%84%EC%A0%84-%EB%B9%A8%EA%B0%84%EB%B0%A9-%EB%AC%B4%EB%A3%8C%EC%9E%85%EC%9E%A5%EB%A7%81%ED%81%AC-%ED%85%94%EB%A0%88%EA%B7%B8%EB%9E%A8-kaak666%EA%B2%80%EC%83%89/?page=21#/C581C95F/
+https://yadongshow.org/yadongzip_ko2/%EB%82%A8%EC%9E%90%EB%8B%A4%EB%A6%AC%EB%91%90%EA%BB%98%EC%97%AC%EC%9E%90%EB%8B%A4%EB%A6%AC%EB%91%90%EA%BB%98-%EC%97%AC%EC%9E%90-%EC%9D%B4%EC%81%A8-%ED%92%80%EB%B2%84%EC%A0%84%EC%9D%80-%ED%85%94%EB%A0%88%EA%B7%B8%EB%9E%A8-sb892-%EC%98%A8%EB%A6%AC%ED%8C%AC%EC%8A%A4-%ED%8A%B8%EC%9C%84%ED%84%B0/?page=34#/C581C95F/
