@@ -10,3 +10,9 @@
 
 3. The Third period : **2020.01.01 ~ 2021.12.31**   
     Pendamic season. The movement between countries drastically decreased due to virus. 
+
+
+# 2. Drawing network
+> drawing the graph by centrality. It will make easier to find out
+> which elements affect Korean's recoginition about the Islam or the others 
+> 
