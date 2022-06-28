@@ -7,6 +7,7 @@ import numpy as np
 import matplotlib.font_manager as fm
 import matplotlib.pyplot as plt 
 from matplotlib import rc
+from sqlite3 import connect
 
 def drawing(dataset, lower_w_bound = 5000):
     
@@ -67,13 +68,20 @@ if __name__ == "__main__":
         file_names = os.listdir(os.path.join(root, 'normal'))
 
     if debug:
+        
         for file_name in file_names:
-            dataset = pd.read_excel(os.path.join(root, 'debug',file_name))
+        
+            conn = connect(os.path.join(root, 'debug', file_name))
+            dataset = pd.read_sql("SELECT src, trg, weight FROM test_data",
+                                  conn)
             drawing(dataset)
+            conn.close()
     else:
         for file_name in file_names:
-            print(file_names)
-            dataset = pd.read_excel(os.path.join(root, 'normal', file_name))
+            conn = connect(os.path.join(root, 'normal', file_name))
+            dataset = pd.read_sql("SELECT src, trg, weight FROM test data",
+                                  conn)
             drawing(dataset)
+            conn.close()
         
     

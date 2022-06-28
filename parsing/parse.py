@@ -7,6 +7,9 @@ import pymysql
 import warnings
 from collections import defaultdict
 
+import sqlite3
+from sqlite3 import connect
+
 def excel_open(name, root = 'parsing/news/Islam', debug = False):
     
     with warnings.catch_warnings(record = True):
@@ -44,12 +47,15 @@ def save_to_excel(frame, path, name):
     columns = ['src', 'trg', 'weight']
     df = pd.DataFrame([(k[0], k[1], v) for k, v in frame.items()], columns = columns)
     try: 
-        # conn = pymysql.connect(host = 'localhost')
-        df.to_sql(os.path.join(path, name) + '.csv', index = False)
+        p = os.path.join(path, name + '.db')
+        conn = connect(p)
+        df.to_sql("SELECT src, trg, weight FROM '{name}'", conn)
+        conn.close()
     except Exception as e:
         print(f"Error arise while saving to excel {name}...")
         print(e)
         print()
+        conn.close()
     
 if __name__ == "__main__":
     
