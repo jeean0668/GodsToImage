@@ -3,6 +3,7 @@ from distutils.log import debug
 import pandas as pd
 import os
 import openpyxl
+import pymysql
 import warnings
 from collections import defaultdict
 
@@ -34,7 +35,7 @@ def split_src_target(news, frame):
     for new_ in news:
         for i in range(len(new_)-1):
             src = new_[i]
-            for j in range(1, len(new_)):
+            for j in range(i+1, len(new_)):
                 trg = new_[j]
                 frame[(src, trg)] += 1
                 
@@ -42,17 +43,21 @@ def save_to_excel(frame, path, name):
 
     columns = ['src', 'trg', 'weight']
     df = pd.DataFrame([(k[0], k[1], v) for k, v in frame.items()], columns = columns)
-    try:
-        df.to_excel(os.path.join(path, name), index = False)
-    except:
+    try: 
+        # conn = pymysql.connect(host = 'localhost')
+        df.to_sql(os.path.join(path, name) + '.csv', index = False)
+    except Exception as e:
         print(f"Error arise while saving to excel {name}...")
+        print(e)
+        print()
     
 if __name__ == "__main__":
     
     root = 'parsing/news/Islam'
     religion = 'Islam'
-    debuggued = True
+    debuggued = False
     
+   
     path = "parsing/news/Islam_parsed"
     
     file_names = os.listdir(root)
@@ -60,9 +65,9 @@ if __name__ == "__main__":
     for file_name in file_names:
         
         frame = defaultdict(int)
-        
+    
         data = excel_open(file_name, root, debug = False)
-        
+        print(path)
         # using only keyword column
         print(f"parsing the {file_name}...")
         parsed = parsing_data(data, debug = False)
@@ -79,7 +84,7 @@ if __name__ == "__main__":
         if debuggued:
             save_to_excel(frame, path + '/debug', '_debug_'+file_name)
         else:
-            save_to_excel(frame, path, file_name)
+            save_to_excel(frame, path + '/normal', '_parsed_'+file_name)
         print(f"{file_name} saving finished...")
         print(f"{file_name} finished!!!")
         print()

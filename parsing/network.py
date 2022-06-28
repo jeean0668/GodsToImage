@@ -8,7 +8,7 @@ import matplotlib.font_manager as fm
 import matplotlib.pyplot as plt 
 from matplotlib import rc
 
-def drawing(dataset, lower_w_bound = 50):
+def drawing(dataset, lower_w_bound = 5000):
     
     centrality = nx.Graph()
     lower_w_bound = lower_w_bound
@@ -57,22 +57,23 @@ def drawing(dataset, lower_w_bound = 50):
     ax.collections[0].set_edgecolor("#555555")
     plt.show()
     
-
 if __name__ == "__main__":
     
-    debug = True
+    debug = False
     root = "parsing/news/Islam_parsed"
     if debug:
         file_names = os.listdir(os.path.join(root, 'debug'))
     else:
-        file_names = os.listdir(root)
+        file_names = os.listdir(os.path.join(root, 'normal'))
 
     if debug:
-        dataset = pd.read_excel(os.path.join(root, 'debug',file_names[0]))
-        drawing(dataset)
+        for file_name in file_names:
+            dataset = pd.read_excel(os.path.join(root, 'debug',file_name))
+            drawing(dataset)
     else:
         for file_name in file_names:
-            dataset = pd.read_excel(os.path.join(root, file_name))
+            print(file_names)
+            dataset = pd.read_excel(os.path.join(root, 'normal', file_name))
             drawing(dataset)
         
     
