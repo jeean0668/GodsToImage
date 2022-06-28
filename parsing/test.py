@@ -18,7 +18,7 @@ conn = sqlite3.connect("parsing/news/Islam_parsed/normal/_parsed_Islam_period_1.
 cursor = conn.cursor()
 print("ok")
 
-a = pd.read_sql("SELECT src FROM '_parsed_Islam_period_1.xlsx'", conn)
+a = pd.read_sql("SELECT src, trg, weight FROM '_parsed_Islam_period_1.xlsx'", conn)
 print("ok")
 print(a.head())
 
