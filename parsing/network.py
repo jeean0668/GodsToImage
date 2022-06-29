@@ -13,6 +13,8 @@ def drawing(dataset, lower_w_bound = 20000):
     
     centrality = nx.Graph()
     lower_w_bound = lower_w_bound
+    dataset = dataset.sort_values(by=['weight'], ascending=False)
+    print(dataset.head())
     
     for ind in range(len(np.where(dataset['weight'] >= lower_w_bound)[0])):
         centrality.add_edge(dataset['src'][ind], dataset['trg'][ind], weight = int(dataset['weight'][ind]))

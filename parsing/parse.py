@@ -1,4 +1,5 @@
 
+from ast import operator
 from distutils.log import debug
 import pandas as pd
 import os
@@ -35,17 +36,22 @@ def parsing_data(excel, debug = False):
     
 def split_src_target(news, frame):
     # split the src and target 
+    print(len(news))
+    
     for new_ in news:
         for i in range(len(new_)-1):
             src = new_[i]
             for j in range(i+1, len(new_)):
                 trg = new_[j]
+                if src == trg : continue
                 frame[(src, trg)] += 1
-                
+         
 def save_to_excel(frame, path, name):
 
     columns = ['src', 'trg', 'weight']
     df = pd.DataFrame([(k[0], k[1], v) for k, v in frame.items()], columns = columns)
+    df = df.sort_values(by=['weight'], ascending=False)
+    df = df.drop_duplicates(subset=['src', 'trg'], keep = 'last')
     try: 
         p = os.path.join(path, name + '.db')
         conn = connect(p)
