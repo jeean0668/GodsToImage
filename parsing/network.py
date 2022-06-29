@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 from matplotlib import rc
 from sqlite3 import connect
 
-def drawing(dataset, lower_w_bound = 5000):
+def drawing(dataset, lower_w_bound = 20000):
     
     centrality = nx.Graph()
     lower_w_bound = lower_w_bound
@@ -78,8 +78,10 @@ if __name__ == "__main__":
             conn.close()
     else:
         for file_name in file_names:
+            
             conn = connect(os.path.join(root, 'normal', file_name))
-            dataset = pd.read_sql("SELECT src, trg, weight FROM test data",
+            
+            dataset = pd.read_sql(f"SELECT src, trg, weight FROM '{file_name[:-3]}'",
                                   conn)
             drawing(dataset)
             conn.close()
