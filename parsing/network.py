@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 from matplotlib import rc
 from sqlite3 import connect
 
-def drawing(dataset, lower_w_bound = 20000):
+def drawing(dataset, lower_w_bound = 500):
     
     centrality = nx.Graph()
     lower_w_bound = lower_w_bound
@@ -23,13 +23,13 @@ def drawing(dataset, lower_w_bound = 20000):
     dgr = nx.degree_centrality(centrality)
     btw = nx.betweenness_centrality(centrality)
     cls = nx.closeness_centrality(centrality)
-    egv = nx.eigenvector_centrality(centrality)
+    #egv = nx.eigenvector_centrality(centrality)
     pgr = nx.pagerank(centrality)
 
     sorted_dgr = sorted(dgr.items(), key=operator.itemgetter(1), reverse = True)
     sorted_btw = sorted(btw.items(), key=operator.itemgetter(1), reverse = True)
     sorted_cls = sorted(cls.items(), key=operator.itemgetter(1), reverse = True)
-    sorted_egv = sorted(egv.items(), key=operator.itemgetter(1), reverse = True)
+    #sorted_egv = sorted(egv.items(), key=operator.itemgetter(1), reverse = True)
     sorted_pgr = sorted(pgr.items(), key=operator.itemgetter(1), reverse = True)
     
     # Graph drawing words network
@@ -57,7 +57,7 @@ def drawing(dataset, lower_w_bound = 20000):
     # rc('font', family = 'NanumBarunGothicOTF')
     nx.draw(G, node_size = sizes, pos = nx.spring_layout(G, k=3.5, iterations = 100), font_family = fontprop, **options)
     ax = plt.gca()
-    ax.collections[0].set_edgecolor("#555555")
+    # ax.collections[0].set_edgecolor("#555555")
     plt.show()
     
 if __name__ == "__main__":
@@ -74,7 +74,7 @@ if __name__ == "__main__":
         for file_name in file_names:
         
             conn = connect(os.path.join(root, 'debug', file_name))
-            dataset = pd.read_sql("SELECT src, trg, weight FROM test_data",
+            dataset = pd.read_sql("SELECT src, trg, weight FROM 'mytable'",
                                   conn)
             drawing(dataset)
             conn.close()
@@ -83,8 +83,9 @@ if __name__ == "__main__":
             
             conn = connect(os.path.join(root, 'normal', file_name))
             
-            dataset = pd.read_sql(f"SELECT src, trg, weight FROM '{file_name[:-3]}'",
+            dataset = pd.read_sql(f"SELECT src, trg, weight FROM 'mytable'",
                                   conn)
+            print(dataset.head())
             drawing(dataset)
             conn.close()
         

@@ -16,10 +16,12 @@ print(a.head())
 """
 conn = sqlite3.connect("parsing/news/Islam_parsed/normal/_parsed_Islam_period_1.xlsx.db")
 cursor = conn.cursor()
+cursor. execute("SELECT name FROM sqlite_master WHERE type='table';")
+print(cursor.fetchall())
 
-a = pd.read_sql("SELECT src, trg, weight FROM '_parsed_Islam_period_1.xlsx'", conn)
+a = pd.read_sql("SELECT src, trg, weight FROM 'mytable'", conn)
 print("ok")
-print(a.sort_values(by='weight', ascending=False))
+a = a.sort_values(by='weight', ascending=False)
 print(a.head(10))
 a = "acd.db"
 
