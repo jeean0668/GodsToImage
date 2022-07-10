@@ -9,14 +9,15 @@ import matplotlib.pyplot as plt
 from matplotlib import rc
 from sqlite3 import connect
 
-def drawing(dataset, lower_w_bound = 500):
+def drawing(dataset, lower_w_bound = 1000):
     
     centrality = nx.Graph()
     lower_w_bound = lower_w_bound
     dataset = dataset.sort_values(by=['weight'], ascending=False)
-    print(dataset.head())
+    dataset = dataset.reset_index(drop=True)
     
     for ind in range(len(np.where(dataset['weight'] >= lower_w_bound)[0])):
+        # print(dataset['src'][ind], dataset['trg'][ind], int(dataset['weight'][ind]))
         centrality.add_edge(dataset['src'][ind], dataset['trg'][ind], weight = int(dataset['weight'][ind]))
     
     # multiple centrality 
@@ -37,6 +38,7 @@ def drawing(dataset, lower_w_bound = 500):
     
     for i in range(len(sorted_pgr)):
         G.add_node(sorted_pgr[i][0], nodesize = sorted_dgr[i][1])
+    # print(np.where(dataset['weight']>lower_w_bound))
     for ind in range(len(np.where(dataset['weight']>lower_w_bound)[0])):
         G.add_weighted_edges_from([(dataset['src'][ind], dataset['trg'][ind], int(dataset['weight'][ind]))])
         
@@ -85,7 +87,6 @@ if __name__ == "__main__":
             
             dataset = pd.read_sql(f"SELECT src, trg, weight FROM 'mytable'",
                                   conn)
-            print(dataset.head())
             drawing(dataset)
             conn.close()
         
