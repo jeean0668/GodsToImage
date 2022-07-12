@@ -12,7 +12,7 @@
     - [3.1.1 analysis](#311-analysis)
 
 # 1. GodsToImage
-    I had a question about the recoginitions of Islam in korea. So I made a plan to analyze it, and creating as drawing using AI.
+I had a question about the recoginitions of Islam in korea. So I made a plan to analyze it, and creating as drawing using AI.
 
 ## 1.1 natural language processing
 First, we decided to analyze the news from BigKinds(빅카인즈). we collected the dataset
@@ -44,6 +44,6 @@ The second period result.
 The Third period result.
 ![Figure_1-3](output/Figure_1-3.png)
 ### 3.1.1 analysis
-    one of the most important characteristic is the arising of China. In the first, second periods, China does not occured in the graph. But the last periods, they occured in the relationship. It means that China influenced the Islam worldwide more deeper than before, and got the close relatioships to them while US kept them at arm's length.
+one of the most important characteristic is the arising of China. In the first, second periods, China does not occured in the graph. But the last periods, they occured in the relationship. It means that China influenced the Islam worldwide more deeper than before, and got the close relatioships to them while US kept them at arm's length.
 
-    The next is the change of interest about the Islam country. In the first and second period, Usually Iraq and Syria is the center of the stage. But in the last period, Afghanistan took the higest interest because of the Taliban. 
+The next is the change of interest about the Islam country. In the first and second period, Usually Iraq and Syria is the center of the stage. But in the last period, Afghanistan took the higest interest because of the Taliban. 
