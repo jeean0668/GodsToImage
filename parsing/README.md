@@ -14,7 +14,7 @@
 
 # 2. Drawing network
 > drawing the graph by centrality. It will make easier to find out
-> which elements affect Korean's recoginition about the Islam or the others 
+> which elements affect Korean's recoginition about the Islam or the others.
 > Because the dataset is too large, we use sql as origin dataset. 
 > with sqlite3, saved all of the keyword pairs in the normal directory
 > present state : We have to modify the keyword spliting codes. 
